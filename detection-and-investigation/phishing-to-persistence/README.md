@@ -24,6 +24,9 @@ The victim opens a phishing attachment. Hidden inside is a call to `mshta.exe` �
 **Command I ran to simulate it:**
 ```cmd
 mshta.exe vbscript:Close(Execute("CreateObject(""WScript.Shell"").Run ""calc.exe"",0,true"))
+
+ # not a malicious script Even though this runs calc.exe, real attacks usually: execute PowerShell
+
 ```
 
 **What I saw in ELK:**
@@ -64,8 +67,7 @@ event.code: "1" AND process.command_line: (*-EncodedCommand* OR *-enc *)
 ```
 Alert triggered → **High severity, Risk Score 73**
 
-![Encoded PowerShell Alert](screenshots/encoded_ps_alert.png)
-![Encoded PowerShell in Discover](screenshots/encoded_ps_discover.png)
+
 
 ---
 
@@ -116,8 +118,6 @@ AND process.parent.name: ("powershell.exe" OR "cmd.exe" OR "mshta.exe")
 ```
 Alert triggered → **High severity, Risk Score 73** — user `NITS` on `win11-vm`
 
-![Scheduled Task Alert](screenshots/schtask_alert.png)
-![Scheduled Task in Discover](screenshots/schtask_discover.png)
 
 ---
 
@@ -168,6 +168,6 @@ All detections were custom rules I built. All evidence is from my real lab runni
 
 - Windows 11 VM (VirtualBox)
 - Sysmon with SwiftOnSecurity config
-- Winlogbeat → Elasticsearch
+- elastic-agent → Elasticsearch
 - Kibana (ELK Stack) for SIEM and detection rules
 - All simulations used safe, harmless commands — no real malware
