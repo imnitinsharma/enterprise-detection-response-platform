@@ -7,8 +7,7 @@ The goal is to understand attacker behavior, generated telemetry, detection logi
 Current Investigations:
 
 * Phishing to Persistence
-* Reconnaissance Activity
-* Brute Force Detection
+* Coming.....
 
 Each investigation contains attack simulation steps, evidence, telemetry analysis, detections, screenshots, and analyst findings.
 
